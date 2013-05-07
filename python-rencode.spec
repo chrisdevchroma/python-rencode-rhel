@@ -59,7 +59,7 @@ popd
 #fix permissions on shared objects
 chmod 0755 \
     %{buildroot}%{python_sitearch}/rencode/_rencode.so \
-    %{buildroot}%{python3_sitearch}/rencode/_rencode.cpython-33m.so
+    %{buildroot}%{python3_sitearch}/rencode/_rencode.cpython-*.so
 
 %check
 pushd tests
