@@ -15,19 +15,10 @@ URL:            http://code.google.com/p/rencode/
 # tar -Jcf rencode-%%{version}-r%%{svn_rev}.tar.xz rencode-%%{version}-r%%{svn_rev} 
 Source0:        rencode-%{version}-r%{svn_rev}.tar.xz
       
-BuildRequires:  python2-devel python3-devel
-BuildRequires:  Cython python3-Cython
+BuildRequires:  python2-devel
+BuildRequires:  Cython
 
 %description
-The rencode module is a modified version of bencode from the
-BitTorrent project.  For complex, heterogeneous data structures with
-many small elements, r-encodings take up significantly less space than
-b-encodings.
-
-%package -n python3-rencode
-Summary:    Web safe object pickling/unpickling
-
-%description -n python3-rencode
 The rencode module is a modified version of bencode from the
 BitTorrent project.  For complex, heterogeneous data structures with
 many small elements, r-encodings take up significantly less space than
@@ -36,24 +27,12 @@ b-encodings.
 %prep
 %setup -qn rencode-%{version}-r%{svn_rev}
 
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-find %{py3dir} -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
-
 find -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python}|'
 
 %build
 CFLAGS="%{optflags}" %{__python} setup.py build
 
-pushd %{py3dir}
-CFLAGS="%{optflags}" %{__python3} setup.py build
-popd
-
 %install
-pushd %{py3dir}
-%{__python3} setup.py install --skip-build --root %{buildroot}
-popd
-
 %{__python} setup.py install -O1 --skip-build --root %{buildroot}
 
 #fix permissions on shared objects
@@ -68,20 +47,9 @@ ln -sf %{buildroot}%{python_sitearch}/rencode rencode
 %{__python} timetest.py
 popd
 
-pushd %{py3dir}/tests
-ln -sf %{buildroot}%{python3_sitearch}/rencode rencode
-%{__python3} test_rencode.py
-%{__python3} timetest.py
-popd
-
 %files
 %{python_sitearch}/rencode
 %{python_sitearch}/rencode*.egg-info
-%doc COPYING README
-
-%files -n python3-rencode
-%{python3_sitearch}/rencode
-%{python3_sitearch}/rencode*.egg-info
 %doc COPYING README
 
 %changelog
