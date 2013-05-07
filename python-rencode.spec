@@ -37,8 +37,7 @@ CFLAGS="%{optflags}" %{__python} setup.py build
 
 #fix permissions on shared objects
 chmod 0755 \
-    %{buildroot}%{python_sitearch}/rencode/_rencode.so \
-    %{buildroot}%{python3_sitearch}/rencode/_rencode.cpython-33m.so
+    %{buildroot}%{python_sitearch}/rencode/_rencode.so
 
 %check
 pushd tests
