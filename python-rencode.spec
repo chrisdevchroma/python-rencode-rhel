@@ -14,6 +14,9 @@ URL:            http://code.google.com/p/rencode/
 # svn export -r%%{svn_rev} http://rencode.googlecode.com/svn/trunk rencode-%%{version}-r%%{svn_rev}
 # tar -Jcf rencode-%%{version}-r%%{svn_rev}.tar.xz rencode-%%{version}-r%%{svn_rev} 
 Source0:        rencode-%{version}-r%{svn_rev}.tar.xz
+
+# support the older version of Python in EL6
+Patch1:        python-rencode-support-older-pythons.patch
       
 BuildRequires:  python2-devel
 BuildRequires:  Cython
@@ -26,6 +29,7 @@ b-encodings.
 
 %prep
 %setup -qn rencode-%{version}-r%{svn_rev}
+%patch1 -p0
 
 find -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python}|'
 
@@ -57,6 +61,7 @@ popd
 - fix permissions on shared objects
 - drop useless setuptools copypasta
 - fix License tag
+- add patch to support older versions of Python
 
 * Thu Apr 18 2013 T.C. Hollingsworth <tchollingsworth@gmail.com> - 1.0.2-1.20121209svn33
 - initial package
