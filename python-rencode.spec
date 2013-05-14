@@ -29,7 +29,7 @@ b-encodings.
 
 %prep
 %setup -qn rencode-%{version}-r%{svn_rev}
-%patch1 -p0
+%patch1 -p1
 
 find -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python}|'
 
