@@ -6,7 +6,7 @@
 
 Name:           python-rencode
 Version:        1.0.2
-Release:        4.%{svn_date}svn%{svn_rev}%{?dist}
+Release:        5.%{svn_date}svn%{svn_rev}%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            http://code.google.com/p/rencode/
@@ -85,6 +85,9 @@ popd
 %doc COPYING README
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0.2-5.20121209svn33
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Wed May 28 2014 Kalev Lember <kalevlember@gmail.com> - 1.0.2-4.20121209svn33
 - Rebuilt for https://fedoraproject.org/wiki/Changes/Python_3.4
 
