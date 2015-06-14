@@ -1,19 +1,14 @@
 # Remove private provides from .so files in the python_sitearch directory
 %global __provides_exclude_from ^%{python_sitearch}/.*\\.so$
 
-%global svn_rev 33
-%global svn_date 20121209
-
 Name:           python-rencode
-Version:        1.0.2
-Release:        6.%{svn_date}svn%{svn_rev}%{?dist}
+Version:        1.0.3
+Release:        1%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
-URL:            http://code.google.com/p/rencode/
+URL:            https://github.com/aresch/rencode
 
-# svn export -r%%{svn_rev} http://rencode.googlecode.com/svn/trunk rencode-%%{version}-r%%{svn_rev}
-# tar -Jcf rencode-%%{version}-r%%{svn_rev}.tar.xz rencode-%%{version}-r%%{svn_rev} 
-Source0:        rencode-%{version}-r%{svn_rev}.tar.xz
+Source0:        https://github.com/aresch/rencode/archive/v%{version}.tar.gz
       
 BuildRequires:  python2-devel python3-devel
 BuildRequires:  Cython python3-Cython
@@ -34,7 +29,7 @@ many small elements, r-encodings take up significantly less space than
 b-encodings.
 
 %prep
-%setup -qn rencode-%{version}-r%{svn_rev}
+%setup -q -n rencode-%{version}
 
 rm -rf %{py3dir}
 cp -a . %{py3dir}
@@ -77,14 +72,18 @@ popd
 %files
 %{python_sitearch}/rencode
 %{python_sitearch}/rencode*.egg-info
-%doc COPYING README
+%doc COPYING README.md
 
 %files -n python3-rencode
 %{python3_sitearch}/rencode
 %{python3_sitearch}/rencode*.egg-info
-%doc COPYING README
+%doc COPYING README.md
 
 %changelog
+* Sun Jun 14 2015 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.3-1
+- Update to version 1.0.3
+- Update upstream location (now on github)
+
 * Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0.2-6.20121209svn33
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
