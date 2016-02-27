@@ -2,8 +2,8 @@
 %global __provides_exclude_from ^%{python_sitearch}/.*\\.so$
 
 Name:           python-rencode
-Version:        1.0.3
-Release:        4%{?dist}
+Version:        1.0.4
+Release:        0%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
@@ -80,6 +80,9 @@ popd
 %doc COPYING README.md
 
 %changelog
+* Sat Feb 27 2016 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.4-0
+- Update to 1.0.4
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.3-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
