@@ -1,6 +1,3 @@
-# Remove private provides from .so files in the python_sitearch directory
-%global __provides_exclude_from ^%{python_sitearch}/.*\\.so$
-
 Name:           python-rencode
 Version:        1.0.4
 Release:        0%{?dist}
@@ -19,6 +16,7 @@ BitTorrent project.  For complex, heterogeneous data structures with
 many small elements, r-encodings take up significantly less space than
 b-encodings.
 
+
 %package -n python2-rencode
 Summary:    Web safe object pickling/unpickling
 %{?python_provide:%python_provide python2-rencode}
@@ -28,6 +26,7 @@ The rencode module is a modified version of bencode from the
 BitTorrent project.  For complex, heterogeneous data structures with
 many small elements, r-encodings take up significantly less space than
 b-encodings.
+
 
 %package -n python3-rencode
 Summary:    Web safe object pickling/unpickling
@@ -42,59 +41,51 @@ b-encodings.
 %prep
 %autosetup -n rencode-%{version}
 
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-find %{py3dir} -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
-
-find -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python}|'
 
 %build
-CFLAGS="%{optflags}" %{__python} setup.py build
+%py2_build
+%py3_build
 
-pushd %{py3dir}
-CFLAGS="%{optflags}" %{__python3} setup.py build
-popd
 
 %install
-pushd %{py3dir}
-%{__python3} setup.py install --skip-build --root %{buildroot}
-popd
+%py2_install
+%py3_install
 
-%{__python} setup.py install -O1 --skip-build --root %{buildroot}
-
-#fix permissions on shared objects
-chmod 0755 \
-    %{buildroot}%{python_sitearch}/rencode/_rencode.so \
-    %{buildroot}%{python3_sitearch}/rencode/_rencode.cpython-*.so
 
 %check
 pushd tests
 ln -sf %{buildroot}%{python_sitearch}/rencode rencode
 %{__python} test_rencode.py
 %{__python} timetest.py
-popd
 
-pushd %{py3dir}/tests
+rm rencode
+
 ln -sf %{buildroot}%{python3_sitearch}/rencode rencode
 %{__python3} test_rencode.py
 %{__python3} timetest.py
 popd
+
 
 %files -n python2-rencode
 %{python_sitearch}/rencode
 %{python_sitearch}/rencode*.egg-info
 %doc COPYING README.md
 
+
 %files -n python3-rencode
 %{python3_sitearch}/rencode
 %{python3_sitearch}/rencode*.egg-info
 %doc COPYING README.md
+
 
 %changelog
 * Sat Feb 27 2016 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.4-0
 - Update to 1.0.4
 - Split out python2-rencode subpackage, and leave main package empty
 - Add use of python_provide macros according to guidelines
+- Clean up spec file, remove redundant code
+- Use python build and install macros
+- Build and test both python2 and python3 packages in same directory
 
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.3-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
