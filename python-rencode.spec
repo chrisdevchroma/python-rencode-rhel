@@ -19,8 +19,19 @@ BitTorrent project.  For complex, heterogeneous data structures with
 many small elements, r-encodings take up significantly less space than
 b-encodings.
 
+%package -n python2-rencode
+Summary:    Web safe object pickling/unpickling
+%{?python_provide:%python_provide python2-rencode}
+
+%description -n python2-rencode
+The rencode module is a modified version of bencode from the
+BitTorrent project.  For complex, heterogeneous data structures with
+many small elements, r-encodings take up significantly less space than
+b-encodings.
+
 %package -n python3-rencode
 Summary:    Web safe object pickling/unpickling
+%{?python_provide:%python_provide python3-rencode}
 
 %description -n python3-rencode
 The rencode module is a modified version of bencode from the
@@ -29,7 +40,7 @@ many small elements, r-encodings take up significantly less space than
 b-encodings.
 
 %prep
-%setup -q -n rencode-%{version}
+%autosetup -n rencode-%{version}
 
 rm -rf %{py3dir}
 cp -a . %{py3dir}
@@ -69,7 +80,7 @@ ln -sf %{buildroot}%{python3_sitearch}/rencode rencode
 %{__python3} timetest.py
 popd
 
-%files
+%files -n python2-rencode
 %{python_sitearch}/rencode
 %{python_sitearch}/rencode*.egg-info
 %doc COPYING README.md
@@ -82,6 +93,8 @@ popd
 %changelog
 * Sat Feb 27 2016 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.4-0
 - Update to 1.0.4
+- Split out python2-rencode subpackage, and leave main package empty
+- Add use of python_provide macros according to guidelines
 
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.3-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
