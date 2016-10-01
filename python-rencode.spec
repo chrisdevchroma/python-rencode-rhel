@@ -1,14 +1,15 @@
 Name:           python-rencode
-Version:        1.0.4
-Release:        0%{?dist}
+Version:        1.0.5
+Release:        1%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
 
-Source0:        https://github.com/aresch/rencode/archive/v%{version}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/r/rencode/rencode-%{version}.tar.gz
       
 BuildRequires:  python2-devel python3-devel
 BuildRequires:  Cython python3-Cython
+
 
 %description
 The rencode module is a modified version of bencode from the
@@ -21,6 +22,7 @@ b-encodings.
 Summary:    Web safe object pickling/unpickling
 %{?python_provide:%python_provide python2-rencode}
 
+
 %description -n python2-rencode
 The rencode module is a modified version of bencode from the
 BitTorrent project.  For complex, heterogeneous data structures with
@@ -32,11 +34,13 @@ b-encodings.
 Summary:    Web safe object pickling/unpickling
 %{?python_provide:%python_provide python3-rencode}
 
+
 %description -n python3-rencode
 The rencode module is a modified version of bencode from the
 BitTorrent project.  For complex, heterogeneous data structures with
 many small elements, r-encodings take up significantly less space than
 b-encodings.
+
 
 %prep
 %autosetup -n rencode-%{version}
@@ -79,6 +83,10 @@ popd
 
 
 %changelog
+* Sat Oct  1 2016 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-1
+- Update to 1.0.5
+- Update source URL
+
 * Sat Feb 27 2016 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.4-0
 - Update to 1.0.4
 - Split out python2-rencode subpackage, and leave main package empty
