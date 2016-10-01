@@ -1,11 +1,11 @@
 Name:           python-rencode
 Version:        1.0.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
 
-Source0:        https://files.pythonhosted.org/packages/source/r/rencode/rencode-%{version}.tar.gz
+Source0:        https://github.com/aresch/rencode/archive/v%{version}.tar.gz
       
 BuildRequires:  python2-devel python3-devel
 BuildRequires:  Cython python3-Cython
@@ -83,6 +83,9 @@ popd
 
 
 %changelog
+* Sat Oct  1 2016 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-2
+- Revert to using github tarballs as PyPi tarballs omit tests
+
 * Sat Oct  1 2016 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-1
 - Update to 1.0.5
 - Update source URL
