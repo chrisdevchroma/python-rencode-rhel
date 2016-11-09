@@ -1,14 +1,14 @@
 Name:           python-rencode
 Version:        1.0.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
 
 Source0:        https://github.com/aresch/rencode/archive/v%{version}.tar.gz
       
-BuildRequires:  python2-devel python3-devel
-BuildRequires:  Cython python3-Cython
+BuildRequires:  python2-devel python%{python3_pkgversion}-devel
+BuildRequires:  Cython python%{python3_pkgversion}-Cython
 
 
 %description
@@ -30,12 +30,12 @@ many small elements, r-encodings take up significantly less space than
 b-encodings.
 
 
-%package -n python3-rencode
+%package -n python%{python3_pkgversion}-rencode
 Summary:    Web safe object pickling/unpickling
-%{?python_provide:%python_provide python3-rencode}
+%{?python_provide:%python_provide python%{python3_pkgversion}-rencode}
 
 
-%description -n python3-rencode
+%description -n python%{python3_pkgversion}-rencode
 The rencode module is a modified version of bencode from the
 BitTorrent project.  For complex, heterogeneous data structures with
 many small elements, r-encodings take up significantly less space than
@@ -59,8 +59,8 @@ b-encodings.
 %check
 pushd tests
 ln -sf %{buildroot}%{python_sitearch}/rencode rencode
-%{__python} test_rencode.py
-%{__python} timetest.py
+%{__python2} test_rencode.py
+%{__python2} timetest.py
 
 rm rencode
 
@@ -73,16 +73,21 @@ popd
 %files -n python2-rencode
 %{python_sitearch}/rencode
 %{python_sitearch}/rencode*.egg-info
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 
 
-%files -n python3-rencode
+%files -n python%{python3_pkgversion}-rencode
 %{python3_sitearch}/rencode
 %{python3_sitearch}/rencode*.egg-info
-%doc COPYING README.md
+%doc README.md
+%license COPYING
 
 
 %changelog
+* Tue Nov 8 2016 Orion Poplawski <orion@cora.nwra.com> - 1.0.5-3
+- Enable builds on EPEL7
+
 * Sat Oct  1 2016 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-2
 - Revert to using github tarballs as PyPi tarballs omit tests
 
