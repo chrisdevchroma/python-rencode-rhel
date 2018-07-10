@@ -7,6 +7,7 @@ URL:            https://github.com/aresch/rencode
 
 Source0:        https://github.com/aresch/rencode/archive/v%{version}.tar.gz
       
+BuildRequires:  gcc
 BuildRequires:  python2-devel python%{python3_pkgversion}-devel
 BuildRequires:  Cython python%{python3_pkgversion}-Cython
 
