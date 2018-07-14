@@ -1,6 +1,6 @@
 Name:           python-rencode
 Version:        1.0.5
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
@@ -86,6 +86,9 @@ popd
 
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.5-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 1.0.5-9
 - Rebuilt for Python 3.7
 
