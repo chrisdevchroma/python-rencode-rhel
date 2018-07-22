@@ -1,6 +1,6 @@
 Name:           python-rencode
 Version:        1.0.5
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
@@ -67,8 +67,8 @@ popd
 
 
 %files -n python2-rencode
-%{python_sitearch}/rencode
-%{python_sitearch}/rencode*.egg-info
+%{python2_sitearch}/rencode
+%{python2_sitearch}/rencode*.egg-info
 %doc README.md
 %license COPYING
 
@@ -81,6 +81,9 @@ popd
 
 
 %changelog
+* Sun Jul 22 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-12
+- Fix usage of macros for file list
+
 * Sun Jul 22 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-11
 - Fix running of tests (BZ #1605871)
 
