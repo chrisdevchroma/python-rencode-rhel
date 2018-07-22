@@ -1,6 +1,6 @@
 Name:           python-rencode
 Version:        1.0.5
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
@@ -59,15 +59,10 @@ b-encodings.
 
 %check
 pushd tests
-ln -sf %{buildroot}%{python_sitearch}/rencode rencode
-%{__python2} test_rencode.py
-%{__python2} timetest.py
-
-rm rencode
-
-ln -sf %{buildroot}%{python3_sitearch}/rencode rencode
-%{__python3} test_rencode.py
-%{__python3} timetest.py
+PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} %{__python2} test_rencode.py
+PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} %{__python2} timetest.py
+PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} %{__python3} test_rencode.py
+PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} %{__python3} timetest.py
 popd
 
 
@@ -86,6 +81,9 @@ popd
 
 
 %changelog
+* Sun Jul 22 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-11
+- Fix running of tests (BZ #1605871)
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.5-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
