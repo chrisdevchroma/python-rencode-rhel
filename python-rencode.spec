@@ -58,14 +58,15 @@ b-encodings.
 
 %prep
 %autosetup -n rencode-%{version}
-cp -a %{SOURCE1} ./rencode
 
-%if 0%{?fedora} < 28
+%if 0%{?fedora} >= 28
+cp -a %{SOURCE1} ./rencode
+%else
 # With Cython <=0.27.x the .pyx name and the resulting Cython extension name
 # need to match, otherwise no init function is generated for the module, and it
 # can't be imported.
-sed -i -e 's|_rencode|rencode|g' setup.py
-sed -i -e 's|_rencode|rencode|g' rencode/__init__.py
+cp -a %{SOURCE1} ./rencode/_rencode.pyx
+sed -i -e s'|rencode/rencode|rencode/_rencode|g' setup.py
 %endif
 
 # Ensure we rebuild the .c file using Cython
@@ -107,7 +108,7 @@ popd
 %changelog
 * Sun Nov  4 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.6-2
 - Remove .c file ahead of build
-- Rename extension module to match .pyx name on Fedora < 28
+- Rename .pyx file to match extension module name on Fedora < 28
 
 * Sun Nov  4 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.6-1
 - Update to version 1.0.6
