@@ -60,6 +60,10 @@ b-encodings.
 %autosetup -n rencode-%{version}
 cp -a %{SOURCE1} ./rencode
 
+# Drop a global declaration into the .pyx file to force an init function to be
+# declared for older Cython
+echo '__JUNK = 1' >> ./rencode/rencode.pyx
+
 # Ensure we rebuild the .c file using Cython
 rm -f rencode/rencode.c
 
@@ -99,6 +103,7 @@ popd
 %changelog
 * Sun Nov  4 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.6-2
 - Remove .c file ahead of build
+- Add a global variable to .pyx file to force an init function to be generated
 
 * Sun Nov  4 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.6-1
 - Update to version 1.0.6
