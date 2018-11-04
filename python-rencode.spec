@@ -1,3 +1,5 @@
+%global srcname rencode
+
 Name:           python-rencode
 Version:        1.0.6
 Release:        1%{?dist}
@@ -31,12 +33,12 @@ many small elements, r-encodings take up significantly less space than
 b-encodings.
 
 
-%package -n python%{python3_pkgversion}-rencode
+%package -n python3-rencode
 Summary:    Web safe object pickling/unpickling
 %{?python_provide:%python_provide python%{python3_pkgversion}-rencode}
 
 
-%description -n python%{python3_pkgversion}-rencode
+%description -n python3-rencode
 The rencode module is a modified version of bencode from the
 BitTorrent project.  For complex, heterogeneous data structures with
 many small elements, r-encodings take up significantly less space than
