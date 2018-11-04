@@ -8,7 +8,13 @@ License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
 
 Source0:        https://files.pythonhosted.org/packages/source/l/%{srcname}/%{srcname}-%{version}.tar.gz
-      
+
+# PyPi source tarball doesn't contain the .pyx file. This is the .pyx file
+# corresponding to tag 1.0.6. Updating the version will also require this file
+# to be updated.
+# https://github.com/aresch/rencode/issues/22
+Source1:        https://raw.githubusercontent.com/aresch/rencode/53d72ac53d9df007aad3a980f049a80d81836619/rencode/rencode.pyx
+
 BuildRequires:  gcc
 BuildRequires:  python2-devel python3-devel
 BuildRequires:  python2-Cython python3-Cython
@@ -47,7 +53,7 @@ b-encodings.
 
 %prep
 %autosetup -n rencode-%{version}
-
+cp -a %{SOURCE1} ./rencode
 
 %build
 %py2_build
@@ -87,6 +93,7 @@ popd
 - Update to version 1.0.6
 - Switch URL to point to PyPi
 - Cleanup old macros in spec file
+- Add rencode.pyx file from git repository
 
 * Sun Jul 22 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-12
 - Fix usage of macros for file list
