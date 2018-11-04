@@ -1,15 +1,15 @@
 Name:           python-rencode
-Version:        1.0.5
-Release:        12%{?dist}
+Version:        1.0.6
+Release:        1%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
 
-Source0:        https://github.com/aresch/rencode/archive/v%{version}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/l/%{srcname}/%{srcname}-%{version}.tar.gz
       
 BuildRequires:  gcc
-BuildRequires:  python2-devel python%{python3_pkgversion}-devel
-BuildRequires:  Cython python%{python3_pkgversion}-Cython
+BuildRequires:  python2-devel python3-devel
+BuildRequires:  python2-Cython python3-Cython
 
 
 %description
@@ -81,6 +81,11 @@ popd
 
 
 %changelog
+* Sun Nov  4 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.6-1
+- Update to version 1.0.6
+- Switch URL to point to PyPi
+- Cleanup old macros in spec file
+
 * Sun Jul 22 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-12
 - Fix usage of macros for file list
 
