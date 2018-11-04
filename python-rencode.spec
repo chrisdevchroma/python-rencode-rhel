@@ -2,7 +2,7 @@
 
 Name:           python-rencode
 Version:        1.0.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
@@ -60,6 +60,9 @@ b-encodings.
 %autosetup -n rencode-%{version}
 cp -a %{SOURCE1} ./rencode
 
+# Make sure we rebuild the module
+rm -f ./rencode/rencode.c
+
 %build
 %py2_build
 %py3_build
@@ -94,6 +97,9 @@ popd
 
 
 %changelog
+* Sun Nov  4 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.6-3
+- Remove package .c extension file before building
+
 * Sun Nov  4 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.6-2
 - Bump release
 
