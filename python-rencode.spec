@@ -16,8 +16,13 @@ Source0:        https://files.pythonhosted.org/packages/source/l/%{srcname}/%{sr
 Source1:        https://raw.githubusercontent.com/aresch/rencode/53d72ac53d9df007aad3a980f049a80d81836619/rencode/rencode.pyx
 
 BuildRequires:  gcc
-BuildRequires:  python2-devel python3-devel
-BuildRequires:  python2-Cython python3-Cython
+BuildRequires:  python2-devel
+BuildRequires:  python2-Cython
+BuildRequires:  python2-wheel
+
+BuildRequires:  python3-devel
+BuildRequires:  python3-Cython
+BuildRequires:  python3-wheel
 
 
 %description
@@ -94,6 +99,7 @@ popd
 - Switch URL to point to PyPi
 - Cleanup old macros in spec file
 - Add rencode.pyx file from git repository
+- Add BuildRequires for python{2,3}-wheel
 
 * Sun Jul 22 2018 Jonathan Underwood <jonathan.underwood@gmail.com> - 1.0.5-12
 - Fix usage of macros for file list
