@@ -1,6 +1,6 @@
 Name:           python-rencode
 Version:        1.0.5
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
@@ -85,6 +85,9 @@ popd
 
 
 %changelog
+* Fri Mar 08 2019 Troy Dawson <tdawson@redhat.com> - 1.0.5-4
+- Rebuilt to change main python from 3.4 to 3.6
+
 * Tue Nov 8 2016 Orion Poplawski <orion@cora.nwra.com> - 1.0.5-3
 - Enable builds on EPEL7
 
