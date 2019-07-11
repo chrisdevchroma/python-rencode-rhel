@@ -2,7 +2,7 @@
 
 Name:           python-rencode
 Version:        1.0.6
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
@@ -16,9 +16,6 @@ Source0:        https://files.pythonhosted.org/packages/source/l/%{srcname}/%{sr
 Source1:        https://raw.githubusercontent.com/aresch/rencode/53d72ac53d9df007aad3a980f049a80d81836619/rencode/rencode.pyx
 
 BuildRequires:  gcc
-BuildRequires:  python2-devel
-BuildRequires:  python2-Cython
-BuildRequires:  python2-wheel
 
 BuildRequires:  python3-devel
 BuildRequires:  python3-Cython
@@ -26,18 +23,6 @@ BuildRequires:  python3-wheel
 
 
 %description
-The rencode module is a modified version of bencode from the
-BitTorrent project.  For complex, heterogeneous data structures with
-many small elements, r-encodings take up significantly less space than
-b-encodings.
-
-
-%package -n python2-rencode
-Summary:    Web safe object pickling/unpickling
-%{?python_provide:%python_provide python2-rencode}
-
-
-%description -n python2-rencode
 The rencode module is a modified version of bencode from the
 BitTorrent project.  For complex, heterogeneous data structures with
 many small elements, r-encodings take up significantly less space than
@@ -64,29 +49,18 @@ cp -a %{SOURCE1} ./rencode
 rm -f ./rencode/rencode.c
 
 %build
-%py2_build
 %py3_build
 
 
 %install
-%py2_install
 %py3_install
 
 
 %check
 pushd tests
-PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} %{__python2} test_rencode.py
-PYTHONPATH=$RPM_BUILD_ROOT%{python2_sitearch} %{__python2} timetest.py
 PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} %{__python3} test_rencode.py
 PYTHONPATH=$RPM_BUILD_ROOT%{python3_sitearch} %{__python3} timetest.py
 popd
-
-
-%files -n python2-rencode
-%{python2_sitearch}/rencode
-%{python2_sitearch}/rencode*.egg-info
-%doc README.md
-%license COPYING
 
 
 %files -n python%{python3_pkgversion}-rencode
@@ -97,6 +71,10 @@ popd
 
 
 %changelog
+* Thu Jul 11 2019 Miro Hrončok <mhroncok@redhat.com> - 1.0.6-5
+- Subpackage python2-rencode has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.0.6-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
