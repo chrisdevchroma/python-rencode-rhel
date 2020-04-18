@@ -7,7 +7,7 @@ Summary:        Web safe object pickling/unpickling
 License:        GPLv3+ and BSD
 URL:            https://github.com/aresch/rencode
 
-Source0:        https://files.pythonhosted.org/packages/source/l/%{srcname}/%{srcname}-%{version}.tar.gz
+Source0:        https://github.com/aresch/rencode/archive/v%{version}.tar.gz
 
 # PyPi source tarball doesn't contain the .pyx file. This is the .pyx file
 # corresponding to tag 1.0.6. Updating the version will also require this file
